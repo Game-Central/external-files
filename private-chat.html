@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <style>
+      .grid-container { 
+          display: grid; 
+          padding: 0px; 
+          grid-template-columns: Auto; 
+          grid-column-gap: 30px;
+          grid-row-gap: 5px;
+  margin: 0 auto;
+      } 
+.grid-item { 
+    border: 0px; 
+    padding: 4px; 
+  text-align: center;
+  margin: 0 auto;
+        
+        }
+      .button {
+  border-radius: 10px;
+  display: block;
+  border: none;
+  background-color: #7A7A7A;
+  padding: 4px;
+  font-size: 22px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  width: 180px;
+      }
+      .text{
+  color: black;
+  text-align: center;
+      }
+      </style>
+  </head>
+<body>
+    <div class="grid-container">
+        
+        <h1 class="text">Private Group Chats</h1>
+        
+      <div class="grid-item">  
+      <h3 class="button">Room Code:</h3>
+      <input id="roomcode" type="text" class="button" style="color: lightgrey;" value="Enter Here">
+      </div>
+        
+      <div class="grid-item">
+      <h2 class="button">Nickname:</h2>
+      <input id="nickname" type="text" class="button" style="color: lightgrey;" value="Enter Here">
+      </div>
+      <br>
+      <div class="grid-item">
+      <button onclick="join()" class="button"> Join Room </button>
+      </div>
+        
+    </div>
+    <script>
+        function go(loc) {
+  var win;
+  win = window.open();
+  win.document.body.style.margin = "0";
+  win.document.body.style.height = "100vh";
+  var iframe = win.document.createElement("iframe");
+  iframe.style.border = "none"; 
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.margin = "0";
+  iframe.src = loc;
+  win.document.body.appendChild(iframe)
+}
+        function join() {
+          var roomcode = document.getElementById('roomcode').value;
+          roomcode = roomcode.replace(/\s+/g, '-');
+          var nickname = document.getElementById('nickname').value;
+          if (roomcode.length >= "3") {
+            if (!nickname.length == "0") {
+              go('https://embed.tlk.io/' + roomcode + '?theme=theme--night&nickname=' + nickname)
+            } else {alert('Enter A Nickname')}
+          } else {alert('Room Code Must Ne 3 Characters Or More')}
+        }
+    </script>
+</body>
+</html>
