@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html>
-<body>
-<div id="embed"></div>
-<a style="color: white;font-size: 20px;">Server Ip: </a><a id="iptext" style="color: white; font-size: 20px;"></a>
-<script type="text/javascript" src="embed.min.js"></script>
-<script type="text/javascript">
-var server = (new window.URL(window.location.href)).searchParams.get('server');
-var name = (new window.URL(window.location.href)).searchParams.get('name');
+  <head>
+    <style>
+          .play-button {
+  border-radius: 10px;
+  width: 70%;
+  border: none;
+  background-color: darkgrey;
+  padding: 4px;
+  font-size: 30px;
+  color: white;
+  margin: auto;
+  position: fixed;
+  left: 0;
+  right: 0;
+      }
+      .page-content {
+  border-radius: 10px;
+  width: 98 %;
+  border: none;
+  background-color: #7A7A7A;
+  padding: 20px;
+  font-size: 30px;
+  color: white;
+        margin: auto;
+      }
+      br {
+   display: block;
+   margin: 5px 0;
 
-var iptext = document.getElementById('iptext');
-iptext.innerHTML = server;
+}
+    </style>
+  </head>
+<body>
+<div class="page-content">
+    <a style="color: white;font-size: 50px;">Server Ip: </a><a id="iptext" style="color: white; font-size: 50px;"></a><br>
+    <div id="embed"></div>
+    <br>
+    <button class="play-button">Play Now</button><br><br>
+    <script type="text/javascript" src="embed.min.js"></script>
+    <script type="text/javascript">
+      var server = (new window.URL(window.location.href)).searchParams.get('server');
+      var name = (new window.URL(window.location.href)).searchParams.get('name');
+
+      var iptext = document.getElementById('iptext');
+      iptext.innerHTML = server;
   
-window.addEventListener("load", () => {
-	new ServerEmbed(document.getElementById("embed"), "100%").ping(server, name, "0", "true", "true");
-});
-</script>
+      window.addEventListener("load", () => {
+	       new ServerEmbed(document.getElementById("embed"), "100%").ping(server, name, "0", "true", "true");
+      });
+    </script>
+  </div>
 </body>
 </html>
