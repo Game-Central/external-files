@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="embed"></div>
+<a style="color: white;font-size: 50px;">Server Ip: </a><a id="iptext" style="color: white; font-size: 50px;"></a>
+<script type="text/javascript" src="embed.min.js"></script>
+<script type="text/javascript">
+var server = (new window.URL(window.location.href)).searchParams.get('server');
+var name = (new window.URL(window.location.href)).searchParams.get('name');
+
+var iptext = document.getElementById('iptext');
+iptext.innerHTML = server;
+  
+window.addEventListener("load", () => {
+	new ServerEmbed(document.getElementById("embed"), "100%").ping(server, name, "0", "true", "true");
+});
+</script>
+</body>
+</html>
