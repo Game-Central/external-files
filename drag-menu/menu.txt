@@ -1,0 +1,151 @@
+function addMenu() {
+  if (document.getElementById("tacounblocks-menu") == null) {
+    var styles = document.createElement('style');
+    document.head.appendChild(styles);
+
+    const stylesAdd = function (text) {
+      styles.innerHTML = styles.innerHTML + text;
+    };
+    styles.classList.add("tacounblocks-Menu");
+
+
+    var menu = document.createElement('div');
+    menu.id = 'tacounblocks-menu';
+    document.body.appendChild(menu);
+    stylesAdd(`
+#tacounblocks-menu {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+}
+`);
+    menu.classList.add("tacounblocks-Menu");
+
+
+    var menuHeader = document.createElement('div');
+    menuHeader.id = 'tacounblocks-menuHeader';
+    menu.appendChild(menuHeader);
+    stylesAdd(`
+#tacounblocks-menuHeader {
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+  max-height: 30px;
+  min-height: 30px;
+}
+`);
+
+
+    var menuBody = document.createElement('div');
+    menuBody.id = 'tacounblocks-menuBody';
+    menu.appendChild(menuBody);
+    stylesAdd(`
+#tacounblocks-menuBody {}
+`);
+
+
+    var menuTitle = document.createElement('a');
+    menuTitle.id = 'tacounblocks-menuTitle';
+    menuTitle.innerHTML = 'Taco Unblocks';
+    stylesAdd(`
+#tacounblocks-menuTitle {
+  padding: 10px;
+  font-size: 20px;
+}
+`);
+    menuHeader.appendChild(menuTitle);
+
+
+    var menuMin = document.createElement('button');
+    menuMin.id = 'tacounblocks-menuMin';
+    stylesAdd(`
+#tacounblocks-menuMin {
+  border: 2px solid #898989;
+  background-color: #999;
+  max-width: 30px;
+  max-height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+
+}
+`);
+    menuMin.innerHTML = '^';
+    menuHeader.appendChild(menuMin);
+    menuMin.onclick = minMenu;
+
+    menuBody.style.display = 'block';
+
+    const minMenu = function () {
+      if (menuBody.style.display == 'none') {
+        document.getElementById('tacounblocks-menuBody').style.display = 'block';
+      } else {
+        document.getElementById('tacounblocks-menuBody').style.display = 'none';
+      }
+    };
+
+
+    var menuClose = document.createElement('button');
+    menuClose.id = 'tacounblocks-menuClose';
+    stylesAdd(`
+#tacounblocks-menuClose {
+  border: 2px solid #898989;
+  background-color: #999;
+  max-width: 30px;
+  max-height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+}
+`);
+    menuClose.innerHTML = 'X';
+    menuHeader.appendChild(menuClose);
+    menuClose.onclick = function() {
+      [...document.getElementsByClassName('tacounblocks-Menu')].forEach(i => {
+        i.remove();
+      });
+    };
+
+
+    const dragElement = function (elmnt) {
+      var pos1 = 0,
+        pos2 = 0,
+        pos3 = 0,
+        pos4 = 0;
+
+      const dragMouseDown = function (e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      };
+
+      const elementDrag = function (e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      };
+
+      const closeDragElement = function () {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      };
+      
+      if (document.getElementById(elmnt.id + "header")) {
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+    };
+    dragElement(document.getElementById("tacounblocks-menu"));
+  } else {console.warn('Menu Already Added');}
+}
+addMenu();
