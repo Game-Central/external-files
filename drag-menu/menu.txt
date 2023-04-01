@@ -74,11 +74,8 @@ function addMenu() {
 `);
     menuMin.innerHTML = '^';
     menuHeader.appendChild(menuMin);
-    menuMin.onclick = minMenu;
-
     menuBody.style.display = 'block';
-
-    const minMenu = function () {
+    menuMin.onclick = function () {
       if (menuBody.style.display == 'none') {
         document.getElementById('tacounblocks-menuBody').style.display = 'block';
       } else {
